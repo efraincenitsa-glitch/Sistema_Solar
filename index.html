@@ -68,34 +68,43 @@
 @media (max-width: 768px) {
 
   .legend{
+    position: fixed;
     left: 50%;
-    right: auto;
-    bottom: auto;
-    top: 10px;
+    bottom: env(safe-area-inset-bottom);
     transform: translateX(-50%);
-    max-width: calc(100% - 20px);
+    width: calc(100% - 20px);
+    max-width: 420px;
+    border-radius: 16px;
     font-size: 12px;
+    z-index: 30;
+
+    backdrop-filter: none; /* elimina efecto flotante */
+    background: #0c1423;
   }
 
   .scale-note{
+    position: fixed;
     left: 50%;
-    right: auto;
     bottom: 10px;
     transform: translateX(-50%);
     max-width: calc(100% - 20px);
     text-align: center;
+    z-index: 20;
   }
 
   main{
-    padding-top: 95px;
+    padding-top: 85px;
+    padding-bottom: 240px;
   }
 
-  /* ✅ DETALLE 2: ajuste visual opcional del header */
   header{
     row-gap: 6px;
+    z-index: 40;
   }
 }
-  
+
+
+
   </style>
 </head>
 
@@ -145,6 +154,11 @@
   <main>
     <canvas id="sky"></canvas>
 
+
+
+    <div class="scale-note">Distancias <strong>no</strong> a escala (compresión no lineal). Periodos y velocidades: valores medios.</div>
+  </main>
+
     <aside class="legend" aria-live="polite">
       <h3 id="planetTitle">Tierra</h3>
       <div class="grid">
@@ -156,9 +170,7 @@
       <div style="margin-top:8px" class="sub">Selecciona planeta con clic/tap para ver sus datos.</div>
     </aside>
 
-    <div class="scale-note">Distancias <strong>no</strong> a escala (compresión no lineal). Periodos y velocidades: valores medios.</div>
-  </main>
-
+    
   <script>
     // ---------- Datos orbitales (valores medios) ----------
     const PLANETS = [
